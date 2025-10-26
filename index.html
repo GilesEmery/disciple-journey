@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Disciple's Journey</title>
+<script src="https://d3js.org/d3.v7.min.js"></script>
+<style>
+  body {
+    font-family: 'Inter', sans-serif;
+    background-color: #f8fafc;
+    margin: 0;
+    overflow-x: hidden;
+  }
+  h2 {
+    text-align: center;
+    color: #0054a1;
+    margin: 20px;
+  }
+  svg {
+    display: block;
+    margin: auto;
+  }
+  .node circle {
+    fill: #60A5FA;
+    cursor: pointer;
+    stroke: #1E3A8A;
+    stroke-width: 2px;
+  }
+  .node text {
+    font-size: 14px;
+    fill: #111827;
+    cursor: pointer;
+  }
+  .link {
+    fill: none;
+    stroke: #94A3B8;
+    stroke-width: 2px;
+  }
+  #tooltip {
+    position: absolute;
+    background: white;
+    border: 1px solid #ccc;
+    padding: 8px 12px;
+    border-radius: 6px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    font-size: 13px;
+    pointer-events: none;
+    display: none;
+  }
+</style>
+</head>
+<body>
+<h2>🌿 The Disciple’s Journey</h2>
+<svg width="960" height="700"></svg>
+<div id="tooltip"></div>
+
+<script>
+// ---------- TREE DATA ----------
+const data = {
+  name: "The Disciple's Journey",
+  children: [
+    {
+      name: "Calling: Follow Me",
+      children: [
+        { name: "Awakening to Jesus", desc: "Recognizing the voice of Christ and responding to His call." },
+        { name: "Responding in Obedience", desc: "Taking first steps of faith and surrender." },
+        { name: "Learning to Listen", desc: "Developing spiritual awareness through Scripture and prayer." }
+      ]
+    },
+    {
+      name: "Formation: Be With Me",
+      children: [
+        { name: "Intimacy with God", desc: "Abiding in daily rhythms of grace, worship, and prayer." },
+        { name: "Character & Integrity", desc: "Becoming more like Christ in love, humility, and truth." },
+        { name: "Practicing Spiritual Rhythms", desc: "Living in patterns that nurture inner transformation." }
+      ]
+    },
+    {
+      name: "Mission: Join Me",
+      children: [
+        { name: "Serving Others", desc: "Meeting needs with compassion and generosity." },
+        { name: "Sharing Good News", desc: "Bearing witness through word and deed." },
+        { name: "Developing as a Leader", desc: "Influencing others toward Kingdom purpose." }
+      ]
+    },
+    {
+      name: "Multiplication: Go and Make Disciples",
+      children: [
+        { name: "Equipping Others", desc: "Training others to follow Jesus and serve others." },
+        { name: "Empowering Ordinary People", desc: "Seeing every believer as a missionary." },
+        { name: "Reproducing Generational Leaders", desc: "Investing in leaders who will raise new leaders." }
+      ]
+    },
+    {
+      name: "Legacy: Abide and Bear Fruit",
+      children: [
+        { name: "Remaining in Christ", desc: "Sustaining fruitfulness through dependence on Jesus." },
+        { name: "Multiplying Movement", desc: "Reproducing Kingdom impact across generations." },
+        { name: "Living for God's Glory", desc: "Seeing all of life as worship and mission." }
+      ]
+    }
+  ]
+};
+
+// ---------- SETUP ----------
+const width = 960, height = 700;
+const svg = d3.select("svg")
+  .attr("viewBox", [-100, -50, width, height])
+  .style("font", "14px sans-serif");
+
+const tree = d3.tree().size([height - 200, width - 300]);
+const root = d3.hierarchy(data);
+root.x0 = height / 2;
+root.y0 = 0;
+
+const tooltip = d3.select("#tooltip");
+
+function update(source) {
+  const nodes = root.descendants();
+  const links = root.links();
+
+  tree(root);
+
+  svg.selectAll(".link")
+    .data(links, d => d.target.id)
+    .join("path")
+    .attr("class", "link")
+    .attr("d", d3.linkHorizontal().x(d => d.y).y(d => d.x));
+
+  const node = svg.selectAll(".node")
+    .data(nodes, d => d.id || (d.id = ++i))
+    .join(
+      enter => {
+        const g = enter.append("g")
+          .attr("class", "node")
+          .attr("transform", d => `translate(${source.y0},${source.x0})`)
+          .on("click", (event, d) => {
+            if (d.children) d._children = d.children, d.children = null;
+            else d.children = d._children, d._children = null;
+            update(d);
+          })
+          .on("mouseover", (event, d) => {
+            if (d.data.desc) {
+              tooltip.style("display", "block")
+                .html(`<strong>${d.data.name}</strong><br>${d.data.desc}`);
+            }
+          })
+          .on("mousemove", event => {
+            tooltip.style("top", (event.pageY + 10) + "px")
+                   .style("left", (event.pageX + 10) + "px");
+          })
+          .on("mouseout", () => tooltip.style("display", "none"));
+
+        g.append("circle").attr("r", 6);
+        g.append("text")
+          .attr("dy", "0.31em")
+          .attr("x", d => d.children || d._children ? -10 : 10)
+          .attr("text-anchor", d => d.children || d._children ? "end" : "start")
+          .text(d => d.data.name);
+        return g;
+      })
+    .transition()
+    .duration(400)
+    .attr("transform", d => `translate(${d.y},${d.x})`);
+}
+
+let i = 0;
+update(root);
+</script>
+</body>
+</html>
