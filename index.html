@@ -1,151 +1,193 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Breakthrough Leadership Pathway</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Vine of Discipleship</title>
 <style>
   body {
-    font-family: 'Inter', sans-serif;
-    background: linear-gradient(#f9fafb, #f3f4f6);
-    color: #111827;
     margin: 0;
-    padding: 0;
+    font-family: "Georgia", serif;
+    background: linear-gradient(to bottom, #f5fff5, #f0faf0);
+    overflow-x: hidden;
   }
 
-  header {
-    text-align: center;
-    padding: 2rem 1rem 1rem;
-  }
-
-  header h1 {
-    color: #0054A1;
-    margin-bottom: 0.5rem;
-  }
-
-  .pathway {
+  .vine {
     position: relative;
     width: 100%;
-    max-width: 800px;
-    margin: auto;
-    padding: 2rem 1rem;
+    height: 2600px;
+    background: url('https://i.imgur.com/YW2cT6C.png') center top / contain no-repeat;
   }
 
-  .stage {
-    position: relative;
-    margin: 4rem 0;
-    text-align: center;
+  .leaf {
+    position: absolute;
+    width: 180px;
+    height: 180px;
+    border-radius: 50%;
+    background: #a2c38b;
+    opacity: 0.3;
+    filter: grayscale(80%);
+    transition: all 1.5s ease;
+    box-shadow: 0 0 10px rgba(0,0,0,0.15);
   }
 
-  .stage h2 {
-    cursor: pointer;
-    padding: 1rem;
-    border-radius: 50px;
+  .leaf.active {
+    opacity: 1;
+    filter: none;
+    transform: scale(1.05);
+  }
+
+  .leaf h2 {
     color: white;
-    margin: 0;
-    font-size: 1.3rem;
+    text-align: center;
+    padding-top: 60px;
+    font-size: 1.1rem;
   }
 
-  .stage-content {
+  .grapes {
     display: none;
-    margin-top: 1rem;
+    position: absolute;
+    text-align: center;
+    width: 100%;
+  }
+
+  .grape {
+    width: 60px;
+    height: 60px;
+    background-color: purple;
+    border-radius: 50%;
+    margin: 10px auto;
+    cursor: pointer;
+    transition: transform 0.3s;
+  }
+
+  .grape:hover {
+    transform: scale(1.1);
+  }
+
+  .grape.clicked {
+    background-color: #9b59b6;
+    transform: scale(1);
+  }
+
+  .reflection {
+    display: none;
     background: white;
-    padding: 1rem 1.5rem;
-    border-radius: 12px;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    border-radius: 8px;
+    padding: 10px;
+    width: 250px;
+    margin: 5px auto;
+    box-shadow: 0 0 10px rgba(0,0,0,0.15);
   }
 
-  .active + .stage-content {
-    display: block;
-    animation: fadeIn 0.5s ease-in-out;
-  }
-
-  @keyframes fadeIn {
-    from { opacity: 0; transform: translateY(-10px); }
-    to { opacity: 1; transform: translateY(0); }
-  }
-
-  /* Color theming */
-  .encounter h2 { background: #0054A1; }
-  .formation h2 { background: #008037; }
-  .engagement h2 { background: #F5A623; }
-  .multiplication h2 { background: #7B61FF; }
-  .legacy h2 { background: #D97706; }
-
-  /* Connector line */
-  .connector {
-    width: 4px;
-    background: #CBD5E1;
-    height: 80px;
-    margin: 0 auto;
-  }
-
-  @media (max-width: 600px) {
-    .stage h2 { font-size: 1.1rem; }
+  @media (max-width: 768px) {
+    .leaf {
+      width: 150px;
+      height: 150px;
+    }
+    .leaf h2 {
+      font-size: 1rem;
+      padding-top: 50px;
+    }
   }
 </style>
 </head>
+
 <body>
-  <header>
-    <h1>🌿 Breakthrough Leadership Pathway</h1>
-    <p>From Encounter to Legacy — the transformational journey of Spirit-led leadership</p>
-  </header>
-
-  <section class="pathway">
-    <!-- Encounter -->
-    <div class="stage encounter">
-      <h2 onclick="toggleStage(this)">1️⃣ Encounter — God’s Initiative</h2>
-      <div class="stage-content">
-        <p>Every breakthrough begins with God’s initiative. The leader is first encountered by God through revelation, surrender, or calling. It is here that vision is birthed and obedience begins.</p>
-        <blockquote>“The call of God precedes the capacity of man.”</blockquote>
-      </div>
+  <div class="vine">
+    <!-- Leaf 1: Calling -->
+    <div class="leaf active" id="leaf1" style="top: 100px; left: 50%;">
+      <h2>Calling: Follow Me</h2>
     </div>
-    <div class="connector"></div>
-
-    <!-- Formation -->
-    <div class="stage formation">
-      <h2 onclick="toggleStage(this)">2️⃣ Formation — Character Shaping</h2>
-      <div class="stage-content">
-        <p>Formation is God’s refining work in a leader’s inner life. Before leading others, one must be deeply led by Christ. This stage tests integrity, patience, and humility.</p>
-        <blockquote>“God forms the heart before He fills the hands.”</blockquote>
-      </div>
+    <div class="grapes" id="grapes1" style="top: 300px;">
+      <div class="grape" data-reflection="Awakening to Jesus: Recognizing His call to new life (Matt 4:19)."></div>
+      <div class="grape" data-reflection="Responding in Obedience: Stepping forward in faith."></div>
+      <div class="grape" data-reflection="Learning to Listen: Hearing and following His voice."></div>
+      <div class="reflection" id="reflection1"></div>
     </div>
-    <div class="connector"></div>
 
-    <!-- Engagement -->
-    <div class="stage engagement">
-      <h2 onclick="toggleStage(this)">3️⃣ Engagement — Obedient Action</h2>
-      <div class="stage-content">
-        <p>Leaders join God’s redemptive mission. They engage their communities with compassion and courage, translating conviction into practical obedience.</p>
-        <blockquote>“Mission is not strategy — it’s surrender in motion.”</blockquote>
-      </div>
+    <!-- Leaf 2: Formation -->
+    <div class="leaf" id="leaf2" style="top: 600px; left: 55%;">
+      <h2>Formation: Be With Me</h2>
     </div>
-    <div class="connector"></div>
-
-    <!-- Multiplication -->
-    <div class="stage multiplication">
-      <h2 onclick="toggleStage(this)">4️⃣ Multiplication — Empowering Others</h2>
-      <div class="stage-content">
-        <p>Breakthrough leaders reproduce themselves. They raise others to lead, decentralize authority, and create cultures of trust and empowerment.</p>
-        <blockquote>“Leadership is legacy when others surpass you.”</blockquote>
-      </div>
+    <div class="grapes" id="grapes2" style="top: 800px;">
+      <div class="grape" data-reflection="Intimacy with God: Being formed in presence (Mark 3:14)."></div>
+      <div class="grape" data-reflection="Character & Integrity: Transformation through surrender."></div>
+      <div class="grape" data-reflection="Practicing Rhythms: Habits that shape the heart."></div>
+      <div class="reflection" id="reflection2"></div>
     </div>
-    <div class="connector"></div>
 
-    <!-- Legacy -->
-    <div class="stage legacy">
-      <h2 onclick="toggleStage(this)">5️⃣ Legacy — Sustaining the Movement</h2>
-      <div class="stage-content">
-        <p>The ultimate fruit of breakthrough leadership is legacy — movements that endure because they are rooted in surrender, simplicity, and reproducibility.</p>
-        <blockquote>“Movements last when leaders release.”</blockquote>
-      </div>
+    <!-- Leaf 3: Mission -->
+    <div class="leaf" id="leaf3" style="top: 1100px; left: 45%;">
+      <h2>Mission: Join Me</h2>
     </div>
-  </section>
+    <div class="grapes" id="grapes3" style="top: 1300px;">
+      <div class="grape" data-reflection="Serving Others: Love in action (Luke 10:1–3)."></div>
+      <div class="grape" data-reflection="Sharing Good News: Witnessing to grace."></div>
+      <div class="grape" data-reflection="Developing as a Leader: Learning to guide others."></div>
+      <div class="reflection" id="reflection3"></div>
+    </div>
 
-  <script>
-    function toggleStage(el) {
-      el.classList.toggle("active");
-    }
-  </script>
+    <!-- Leaf 4: Multiplication -->
+    <div class="leaf" id="leaf4" style="top: 1600px; left: 55%;">
+      <h2>Multiplication: Go and Make Disciples</h2>
+    </div>
+    <div class="grapes" id="grapes4" style="top: 1800px;">
+      <div class="grape" data-reflection="Equipping Others: Investing in growth (Matt 28:19–20)."></div>
+      <div class="grape" data-reflection="Empowering Ordinary People: Sharing leadership."></div>
+      <div class="grape" data-reflection="Reproducing Leaders: Building future disciplers."></div>
+      <div class="reflection" id="reflection4"></div>
+    </div>
+
+    <!-- Leaf 5: Legacy -->
+    <div class="leaf" id="leaf5" style="top: 2100px; left: 50%;">
+      <h2>Legacy: Abide and Bear Fruit</h2>
+    </div>
+    <div class="grapes" id="grapes5" style="top: 2300px;">
+      <div class="grape" data-reflection="Remaining in Christ: The heart of fruitfulness (John 15:8)."></div>
+      <div class="grape" data-reflection="Multiplying Movement: Extending the kingdom."></div>
+      <div class="grape" data-reflection="Living for God’s Glory: Finishing well."></div>
+      <div class="reflection" id="reflection5"></div>
+    </div>
+  </div>
+
+<script>
+  // Activation logic
+  const stages = 5;
+  for (let i = 1; i <= stages; i++) {
+    const grapes = document.querySelectorAll(`#grapes${i} .grape`);
+    const reflectionBox = document.getElementById(`reflection${i}`);
+    const nextLeaf = document.getElementById(`leaf${i + 1}`);
+    const nextGrapes = document.getElementById(`grapes${i + 1}`);
+
+    let clickedCount = 0;
+
+    grapes.forEach(grape => {
+      grape.addEventListener('click', () => {
+        const text = grape.getAttribute('data-reflection');
+        reflectionBox.textContent = text;
+        reflectionBox.style.display = 'block';
+        grape.classList.add('clicked');
+
+        if (!grape.clickedOnce) {
+          grape.clickedOnce = true;
+          clickedCount++;
+        }
+
+        if (clickedCount === 3 && nextLeaf) {
+          nextLeaf.classList.add('active');
+          nextGrapes.style.display = 'block';
+          window.scrollTo({
+            top: nextLeaf.offsetTop - 100,
+            behavior: 'smooth'
+          });
+        }
+      });
+    });
+  }
+
+  // Show grapes for first stage
+  document.getElementById('grapes1').style.display = 'block';
+</script>
 </body>
 </html>
