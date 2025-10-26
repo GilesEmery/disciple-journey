@@ -2,171 +2,150 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>The Disciple's Journey</title>
-<script src="https://d3js.org/d3.v7.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Breakthrough Leadership Pathway</title>
 <style>
   body {
     font-family: 'Inter', sans-serif;
-    background-color: #f8fafc;
+    background: linear-gradient(#f9fafb, #f3f4f6);
+    color: #111827;
     margin: 0;
-    overflow-x: hidden;
+    padding: 0;
   }
-  h2 {
+
+  header {
     text-align: center;
-    color: #0054a1;
-    margin: 20px;
+    padding: 2rem 1rem 1rem;
   }
-  svg {
-    display: block;
+
+  header h1 {
+    color: #0054A1;
+    margin-bottom: 0.5rem;
+  }
+
+  .pathway {
+    position: relative;
+    width: 100%;
+    max-width: 800px;
     margin: auto;
+    padding: 2rem 1rem;
   }
-  .node circle {
-    fill: #60A5FA;
+
+  .stage {
+    position: relative;
+    margin: 4rem 0;
+    text-align: center;
+  }
+
+  .stage h2 {
     cursor: pointer;
-    stroke: #1E3A8A;
-    stroke-width: 2px;
+    padding: 1rem;
+    border-radius: 50px;
+    color: white;
+    margin: 0;
+    font-size: 1.3rem;
   }
-  .node text {
-    font-size: 14px;
-    fill: #111827;
-    cursor: pointer;
-  }
-  .link {
-    fill: none;
-    stroke: #94A3B8;
-    stroke-width: 2px;
-  }
-  #tooltip {
-    position: absolute;
-    background: white;
-    border: 1px solid #ccc;
-    padding: 8px 12px;
-    border-radius: 6px;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-    font-size: 13px;
-    pointer-events: none;
+
+  .stage-content {
     display: none;
+    margin-top: 1rem;
+    background: white;
+    padding: 1rem 1.5rem;
+    border-radius: 12px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+  }
+
+  .active + .stage-content {
+    display: block;
+    animation: fadeIn 0.5s ease-in-out;
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-10px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* Color theming */
+  .encounter h2 { background: #0054A1; }
+  .formation h2 { background: #008037; }
+  .engagement h2 { background: #F5A623; }
+  .multiplication h2 { background: #7B61FF; }
+  .legacy h2 { background: #D97706; }
+
+  /* Connector line */
+  .connector {
+    width: 4px;
+    background: #CBD5E1;
+    height: 80px;
+    margin: 0 auto;
+  }
+
+  @media (max-width: 600px) {
+    .stage h2 { font-size: 1.1rem; }
   }
 </style>
 </head>
 <body>
-<h2>🌿 The Disciple’s Journey</h2>
-<svg width="960" height="700"></svg>
-<div id="tooltip"></div>
+  <header>
+    <h1>🌿 Breakthrough Leadership Pathway</h1>
+    <p>From Encounter to Legacy — the transformational journey of Spirit-led leadership</p>
+  </header>
 
-<script>
-// ---------- TREE DATA ----------
-const data = {
-  name: "The Disciple's Journey",
-  children: [
-    {
-      name: "Calling: Follow Me",
-      children: [
-        { name: "Awakening to Jesus", desc: "Recognizing the voice of Christ and responding to His call." },
-        { name: "Responding in Obedience", desc: "Taking first steps of faith and surrender." },
-        { name: "Learning to Listen", desc: "Developing spiritual awareness through Scripture and prayer." }
-      ]
-    },
-    {
-      name: "Formation: Be With Me",
-      children: [
-        { name: "Intimacy with God", desc: "Abiding in daily rhythms of grace, worship, and prayer." },
-        { name: "Character & Integrity", desc: "Becoming more like Christ in love, humility, and truth." },
-        { name: "Practicing Spiritual Rhythms", desc: "Living in patterns that nurture inner transformation." }
-      ]
-    },
-    {
-      name: "Mission: Join Me",
-      children: [
-        { name: "Serving Others", desc: "Meeting needs with compassion and generosity." },
-        { name: "Sharing Good News", desc: "Bearing witness through word and deed." },
-        { name: "Developing as a Leader", desc: "Influencing others toward Kingdom purpose." }
-      ]
-    },
-    {
-      name: "Multiplication: Go and Make Disciples",
-      children: [
-        { name: "Equipping Others", desc: "Training others to follow Jesus and serve others." },
-        { name: "Empowering Ordinary People", desc: "Seeing every believer as a missionary." },
-        { name: "Reproducing Generational Leaders", desc: "Investing in leaders who will raise new leaders." }
-      ]
-    },
-    {
-      name: "Legacy: Abide and Bear Fruit",
-      children: [
-        { name: "Remaining in Christ", desc: "Sustaining fruitfulness through dependence on Jesus." },
-        { name: "Multiplying Movement", desc: "Reproducing Kingdom impact across generations." },
-        { name: "Living for God's Glory", desc: "Seeing all of life as worship and mission." }
-      ]
+  <section class="pathway">
+    <!-- Encounter -->
+    <div class="stage encounter">
+      <h2 onclick="toggleStage(this)">1️⃣ Encounter — God’s Initiative</h2>
+      <div class="stage-content">
+        <p>Every breakthrough begins with God’s initiative. The leader is first encountered by God through revelation, surrender, or calling. It is here that vision is birthed and obedience begins.</p>
+        <blockquote>“The call of God precedes the capacity of man.”</blockquote>
+      </div>
+    </div>
+    <div class="connector"></div>
+
+    <!-- Formation -->
+    <div class="stage formation">
+      <h2 onclick="toggleStage(this)">2️⃣ Formation — Character Shaping</h2>
+      <div class="stage-content">
+        <p>Formation is God’s refining work in a leader’s inner life. Before leading others, one must be deeply led by Christ. This stage tests integrity, patience, and humility.</p>
+        <blockquote>“God forms the heart before He fills the hands.”</blockquote>
+      </div>
+    </div>
+    <div class="connector"></div>
+
+    <!-- Engagement -->
+    <div class="stage engagement">
+      <h2 onclick="toggleStage(this)">3️⃣ Engagement — Obedient Action</h2>
+      <div class="stage-content">
+        <p>Leaders join God’s redemptive mission. They engage their communities with compassion and courage, translating conviction into practical obedience.</p>
+        <blockquote>“Mission is not strategy — it’s surrender in motion.”</blockquote>
+      </div>
+    </div>
+    <div class="connector"></div>
+
+    <!-- Multiplication -->
+    <div class="stage multiplication">
+      <h2 onclick="toggleStage(this)">4️⃣ Multiplication — Empowering Others</h2>
+      <div class="stage-content">
+        <p>Breakthrough leaders reproduce themselves. They raise others to lead, decentralize authority, and create cultures of trust and empowerment.</p>
+        <blockquote>“Leadership is legacy when others surpass you.”</blockquote>
+      </div>
+    </div>
+    <div class="connector"></div>
+
+    <!-- Legacy -->
+    <div class="stage legacy">
+      <h2 onclick="toggleStage(this)">5️⃣ Legacy — Sustaining the Movement</h2>
+      <div class="stage-content">
+        <p>The ultimate fruit of breakthrough leadership is legacy — movements that endure because they are rooted in surrender, simplicity, and reproducibility.</p>
+        <blockquote>“Movements last when leaders release.”</blockquote>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    function toggleStage(el) {
+      el.classList.toggle("active");
     }
-  ]
-};
-
-// ---------- SETUP ----------
-const width = 960, height = 700;
-const svg = d3.select("svg")
-  .attr("viewBox", [-100, -50, width, height])
-  .style("font", "14px sans-serif");
-
-const tree = d3.tree().size([height - 200, width - 300]);
-const root = d3.hierarchy(data);
-root.x0 = height / 2;
-root.y0 = 0;
-
-const tooltip = d3.select("#tooltip");
-
-function update(source) {
-  const nodes = root.descendants();
-  const links = root.links();
-
-  tree(root);
-
-  svg.selectAll(".link")
-    .data(links, d => d.target.id)
-    .join("path")
-    .attr("class", "link")
-    .attr("d", d3.linkHorizontal().x(d => d.y).y(d => d.x));
-
-  const node = svg.selectAll(".node")
-    .data(nodes, d => d.id || (d.id = ++i))
-    .join(
-      enter => {
-        const g = enter.append("g")
-          .attr("class", "node")
-          .attr("transform", d => `translate(${source.y0},${source.x0})`)
-          .on("click", (event, d) => {
-            if (d.children) d._children = d.children, d.children = null;
-            else d.children = d._children, d._children = null;
-            update(d);
-          })
-          .on("mouseover", (event, d) => {
-            if (d.data.desc) {
-              tooltip.style("display", "block")
-                .html(`<strong>${d.data.name}</strong><br>${d.data.desc}`);
-            }
-          })
-          .on("mousemove", event => {
-            tooltip.style("top", (event.pageY + 10) + "px")
-                   .style("left", (event.pageX + 10) + "px");
-          })
-          .on("mouseout", () => tooltip.style("display", "none"));
-
-        g.append("circle").attr("r", 6);
-        g.append("text")
-          .attr("dy", "0.31em")
-          .attr("x", d => d.children || d._children ? -10 : 10)
-          .attr("text-anchor", d => d.children || d._children ? "end" : "start")
-          .text(d => d.data.name);
-        return g;
-      })
-    .transition()
-    .duration(400)
-    .attr("transform", d => `translate(${d.y},${d.x})`);
-}
-
-let i = 0;
-update(root);
-</script>
+  </script>
 </body>
 </html>
