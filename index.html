@@ -1,193 +1,303 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>The Vine of Discipleship</title>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>The Disciple’s Journey</title>
 <style>
   body {
+    font-family: "Inter", "Helvetica Neue", sans-serif;
     margin: 0;
-    font-family: "Georgia", serif;
-    background: linear-gradient(to bottom, #f5fff5, #f0faf0);
-    overflow-x: hidden;
+    background-color: #f9fafb;
+    color: #333;
+    line-height: 1.6;
   }
 
-  .vine {
-    position: relative;
-    width: 100%;
-    height: 2600px;
-    background: url('https://i.imgur.com/YW2cT6C.png') center top / contain no-repeat;
-  }
-
-  .leaf {
-    position: absolute;
-    width: 180px;
-    height: 180px;
-    border-radius: 50%;
-    background: #a2c38b;
-    opacity: 0.3;
-    filter: grayscale(80%);
-    transition: all 1.5s ease;
-    box-shadow: 0 0 10px rgba(0,0,0,0.15);
-  }
-
-  .leaf.active {
-    opacity: 1;
-    filter: none;
-    transform: scale(1.05);
-  }
-
-  .leaf h2 {
-    color: white;
+  h1 {
     text-align: center;
-    padding-top: 60px;
-    font-size: 1.1rem;
+    margin-top: 40px;
+    color: #0054a1;
+    font-weight: 600;
   }
 
-  .grapes {
-    display: none;
-    position: absolute;
-    text-align: center;
-    width: 100%;
-  }
-
-  .grape {
-    width: 60px;
-    height: 60px;
-    background-color: purple;
-    border-radius: 50%;
-    margin: 10px auto;
-    cursor: pointer;
-    transition: transform 0.3s;
-  }
-
-  .grape:hover {
-    transform: scale(1.1);
-  }
-
-  .grape.clicked {
-    background-color: #9b59b6;
-    transform: scale(1);
-  }
-
-  .reflection {
-    display: none;
+  .accordion {
+    max-width: 700px;
+    margin: 40px auto;
     background: white;
-    border-radius: 8px;
-    padding: 10px;
-    width: 250px;
-    margin: 5px auto;
-    box-shadow: 0 0 10px rgba(0,0,0,0.15);
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+    overflow: hidden;
+  }
+
+  .stage {
+    border-bottom: 1px solid #e5e7eb;
+  }
+
+  .stage button {
+    width: 100%;
+    background: #e9f2f9;
+    border: none;
+    outline: none;
+    text-align: left;
+    padding: 18px 24px;
+    font-size: 1.2rem;
+    color: #0054a1;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.3s ease;
+  }
+
+  .stage button:hover {
+    background: #dceefb;
+  }
+
+  .content {
+    display: none;
+    padding: 20px 24px;
+    background: #fff;
+  }
+
+  .content p {
+    margin: 10px 0;
+  }
+
+  .verse {
+    font-style: italic;
+    color: #047857;
+  }
+
+  .subpoint {
+    border-left: 3px solid #e5e7eb;
+    margin: 10px 0;
+    padding-left: 15px;
+  }
+
+  .subpoint button {
+    background: none;
+    border: none;
+    color: #0c4a6e;
+    font-weight: 500;
+    cursor: pointer;
+    padding: 5px 0;
+    font-size: 1rem;
+    text-align: left;
+  }
+
+  .subpoint button:hover {
+    text-decoration: underline;
+  }
+
+  .subcontent {
+    display: none;
+    margin-top: 5px;
+    padding: 10px 15px;
+    border-left: 2px solid #93c5fd;
+    background: #f9fafb;
+    border-radius: 6px;
+  }
+
+  .subcontent p {
+    margin: 0;
   }
 
   @media (max-width: 768px) {
-    .leaf {
-      width: 150px;
-      height: 150px;
+    .accordion {
+      margin: 20px;
     }
-    .leaf h2 {
-      font-size: 1rem;
-      padding-top: 50px;
+    h1 {
+      font-size: 1.5rem;
     }
   }
 </style>
 </head>
 
 <body>
-  <div class="vine">
-    <!-- Leaf 1: Calling -->
-    <div class="leaf active" id="leaf1" style="top: 100px; left: 50%;">
-      <h2>Calling: Follow Me</h2>
-    </div>
-    <div class="grapes" id="grapes1" style="top: 300px;">
-      <div class="grape" data-reflection="Awakening to Jesus: Recognizing His call to new life (Matt 4:19)."></div>
-      <div class="grape" data-reflection="Responding in Obedience: Stepping forward in faith."></div>
-      <div class="grape" data-reflection="Learning to Listen: Hearing and following His voice."></div>
-      <div class="reflection" id="reflection1"></div>
+  <h1>The Disciple’s Journey</h1>
+  <div class="accordion">
+    <!-- Stage 1: Calling -->
+    <div class="stage">
+      <button>Calling: Follow Me</button>
+      <div class="content">
+        <p>Jesus awakens our hearts and invites us to walk in His way, leaving behind our old lives to discover true belonging and purpose.</p>
+        <p class="verse">“Come, follow me,” Jesus said, “and I will send you out to fish for people.” — Matthew 4:19</p>
+
+        <div class="subpoint">
+          <button>Awakening to Jesus</button>
+          <div class="subcontent">
+            <p>Our hearts are stirred to recognize His presence and call. Jesus meets us where we are and awakens faith in us.</p>
+            <p class="verse">John 1:35–39</p>
+          </div>
+        </div>
+
+        <div class="subpoint">
+          <button>Responding in Obedience</button>
+          <div class="subcontent">
+            <p>Following Jesus requires trust — a willingness to step out from what’s familiar and surrender our own agenda to His will.</p>
+            <p class="verse">Luke 5:11</p>
+          </div>
+        </div>
+
+        <div class="subpoint">
+          <button>Learning to Listen</button>
+          <div class="subcontent">
+            <p>We learn to listen to His voice — through Scripture, prayer, and the Spirit’s prompting — discovering that following begins with hearing.</p>
+            <p class="verse">John 10:27</p>
+          </div>
+        </div>
+      </div>
     </div>
 
-    <!-- Leaf 2: Formation -->
-    <div class="leaf" id="leaf2" style="top: 600px; left: 55%;">
-      <h2>Formation: Be With Me</h2>
-    </div>
-    <div class="grapes" id="grapes2" style="top: 800px;">
-      <div class="grape" data-reflection="Intimacy with God: Being formed in presence (Mark 3:14)."></div>
-      <div class="grape" data-reflection="Character & Integrity: Transformation through surrender."></div>
-      <div class="grape" data-reflection="Practicing Rhythms: Habits that shape the heart."></div>
-      <div class="reflection" id="reflection2"></div>
+    <!-- Stage 2: Formation -->
+    <div class="stage">
+      <button>Formation: Be With Me</button>
+      <div class="content">
+        <p>Jesus shapes our inner life as we learn to abide in Him, transforming our desires, habits, and character.</p>
+        <p class="verse">He appointed twelve that they might be with him. — Mark 3:14</p>
+
+        <div class="subpoint">
+          <button>Intimacy with God</button>
+          <div class="subcontent">
+            <p>Abiding in Christ roots us in love. As we spend time with Him, we discover that formation happens through relationship, not performance.</p>
+            <p class="verse">John 15:4–5</p>
+          </div>
+        </div>
+
+        <div class="subpoint">
+          <button>Character & Integrity</button>
+          <div class="subcontent">
+            <p>Christ forms our inner life, shaping how we respond, speak, and love others. Our integrity becomes an overflow of His presence.</p>
+            <p class="verse">Romans 12:2</p>
+          </div>
+        </div>
+
+        <div class="subpoint">
+          <button>Practicing Rhythms</button>
+          <div class="subcontent">
+            <p>Through prayer, solitude, fasting, and Scripture meditation, we are reshaped by grace and made ready for His mission.</p>
+            <p class="verse">Matthew 6:6</p>
+          </div>
+        </div>
+      </div>
     </div>
 
-    <!-- Leaf 3: Mission -->
-    <div class="leaf" id="leaf3" style="top: 1100px; left: 45%;">
-      <h2>Mission: Join Me</h2>
-    </div>
-    <div class="grapes" id="grapes3" style="top: 1300px;">
-      <div class="grape" data-reflection="Serving Others: Love in action (Luke 10:1–3)."></div>
-      <div class="grape" data-reflection="Sharing Good News: Witnessing to grace."></div>
-      <div class="grape" data-reflection="Developing as a Leader: Learning to guide others."></div>
-      <div class="reflection" id="reflection3"></div>
+    <!-- Stage 3: Mission -->
+    <div class="stage">
+      <button>Mission: Join Me</button>
+      <div class="content">
+        <p>Jesus sends us into the world to reflect His love, proclaim the good news, and bring restoration to others.</p>
+        <p class="verse">The Lord appointed seventy-two others and sent them two by two ahead of him. — Luke 10:1–3</p>
+
+        <div class="subpoint">
+          <button>Serving Others</button>
+          <div class="subcontent">
+            <p>Disciples serve with compassion, reflecting the heart of Christ in tangible acts of love and justice.</p>
+            <p class="verse">Galatians 5:13</p>
+          </div>
+        </div>
+
+        <div class="subpoint">
+          <button>Sharing Good News</button>
+          <div class="subcontent">
+            <p>We are witnesses of God’s grace — bringing hope, truth, and reconciliation wherever we go.</p>
+            <p class="verse">Romans 10:14–15</p>
+          </div>
+        </div>
+
+        <div class="subpoint">
+          <button>Developing as a Leader</button>
+          <div class="subcontent">
+            <p>We grow as leaders when we take responsibility for others’ growth and guide them toward the way of Jesus.</p>
+            <p class="verse">2 Timothy 2:2</p>
+          </div>
+        </div>
+      </div>
     </div>
 
-    <!-- Leaf 4: Multiplication -->
-    <div class="leaf" id="leaf4" style="top: 1600px; left: 55%;">
-      <h2>Multiplication: Go and Make Disciples</h2>
-    </div>
-    <div class="grapes" id="grapes4" style="top: 1800px;">
-      <div class="grape" data-reflection="Equipping Others: Investing in growth (Matt 28:19–20)."></div>
-      <div class="grape" data-reflection="Empowering Ordinary People: Sharing leadership."></div>
-      <div class="grape" data-reflection="Reproducing Leaders: Building future disciplers."></div>
-      <div class="reflection" id="reflection4"></div>
+    <!-- Stage 4: Multiplication -->
+    <div class="stage">
+      <button>Multiplication: Go and Make Disciples</button>
+      <div class="content">
+        <p>The life of Jesus multiplies through us as we disciple others, investing in the next generation of Kingdom leaders.</p>
+        <p class="verse">Therefore go and make disciples of all nations. — Matthew 28:19–20</p>
+
+        <div class="subpoint">
+          <button>Equipping Others</button>
+          <div class="subcontent">
+            <p>We teach others what Jesus has taught us — helping them discover their gifts and calling.</p>
+            <p class="verse">Ephesians 4:11–13</p>
+          </div>
+        </div>
+
+        <div class="subpoint">
+          <button>Empowering Ordinary People</button>
+          <div class="subcontent">
+            <p>Discipleship is not for the elite — it’s for everyone who follows Jesus, empowered by the Holy Spirit.</p>
+            <p class="verse">Acts 1:8</p>
+          </div>
+        </div>
+
+        <div class="subpoint">
+          <button>Reproducing Leaders</button>
+          <div class="subcontent">
+            <p>We intentionally develop others to become disciple-makers who carry the movement forward.</p>
+            <p class="verse">2 Timothy 2:2</p>
+          </div>
+        </div>
+      </div>
     </div>
 
-    <!-- Leaf 5: Legacy -->
-    <div class="leaf" id="leaf5" style="top: 2100px; left: 50%;">
-      <h2>Legacy: Abide and Bear Fruit</h2>
-    </div>
-    <div class="grapes" id="grapes5" style="top: 2300px;">
-      <div class="grape" data-reflection="Remaining in Christ: The heart of fruitfulness (John 15:8)."></div>
-      <div class="grape" data-reflection="Multiplying Movement: Extending the kingdom."></div>
-      <div class="grape" data-reflection="Living for God’s Glory: Finishing well."></div>
-      <div class="reflection" id="reflection5"></div>
+    <!-- Stage 5: Legacy -->
+    <div class="stage">
+      <button>Legacy: Abide and Bear Fruit</button>
+      <div class="content">
+        <p>We live for God’s glory, bearing lasting fruit that continues to bless others long after we are gone.</p>
+        <p class="verse">This is to my Father’s glory, that you bear much fruit. — John 15:8</p>
+
+        <div class="subpoint">
+          <button>Remaining in Christ</button>
+          <div class="subcontent">
+            <p>Our ultimate calling is to abide in Christ. Fruitfulness is not achieved, but received through His life in us.</p>
+            <p class="verse">John 15:5</p>
+          </div>
+        </div>
+
+        <div class="subpoint">
+          <button>Multiplying Movement</button>
+          <div class="subcontent">
+            <p>As we release others into mission, the Gospel spreads through generations of faithful disciples.</p>
+            <p class="verse">Colossians 1:6</p>
+          </div>
+        </div>
+
+        <div class="subpoint">
+          <button>Living for God’s Glory</button>
+          <div class="subcontent">
+            <p>All of life becomes worship — work, relationships, and rest flow from a heart centered on God’s glory.</p>
+            <p class="verse">1 Corinthians 10:31</p>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 
 <script>
-  // Activation logic
-  const stages = 5;
-  for (let i = 1; i <= stages; i++) {
-    const grapes = document.querySelectorAll(`#grapes${i} .grape`);
-    const reflectionBox = document.getElementById(`reflection${i}`);
-    const nextLeaf = document.getElementById(`leaf${i + 1}`);
-    const nextGrapes = document.getElementById(`grapes${i + 1}`);
-
-    let clickedCount = 0;
-
-    grapes.forEach(grape => {
-      grape.addEventListener('click', () => {
-        const text = grape.getAttribute('data-reflection');
-        reflectionBox.textContent = text;
-        reflectionBox.style.display = 'block';
-        grape.classList.add('clicked');
-
-        if (!grape.clickedOnce) {
-          grape.clickedOnce = true;
-          clickedCount++;
-        }
-
-        if (clickedCount === 3 && nextLeaf) {
-          nextLeaf.classList.add('active');
-          nextGrapes.style.display = 'block';
-          window.scrollTo({
-            top: nextLeaf.offsetTop - 100,
-            behavior: 'smooth'
-          });
-        }
-      });
+  // Accordion open/close for stages
+  const stageButtons = document.querySelectorAll(".stage > button");
+  stageButtons.forEach(btn => {
+    btn.addEventListener("click", () => {
+      const content = btn.nextElementSibling;
+      content.style.display = content.style.display === "block" ? "none" : "block";
     });
-  }
+  });
 
-  // Show grapes for first stage
-  document.getElementById('grapes1').style.display = 'block';
+  // Subpoint toggles
+  const subButtons = document.querySelectorAll(".subpoint > button");
+  subButtons.forEach(subBtn => {
+    subBtn.addEventListener("click", () => {
+      const subcontent = subBtn.nextElementSibling;
+      subcontent.style.display = subcontent.style.display === "block" ? "none" : "block";
+    });
+  });
 </script>
 </body>
 </html>
